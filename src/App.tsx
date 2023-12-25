@@ -3,8 +3,10 @@ import './Card.tsx';
 import './lib/Card.ts';
 import './lib/CardDeck.ts';
 import CardDesk from './lib/CardDeck.ts';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Card from './Card.tsx';
+import PokerHand from './lib/PokerHand.ts';
+
 
 function App() {
   interface CardInfo {
@@ -12,18 +14,18 @@ function App() {
     suit: string;
   }
 
-  const [cardState, setCardState] = useState<CardInfo[]>([]);
+  const [cardsState, setCardsState] = useState<CardInfo[]>([]);
   const showCards = () => {
     const cardBlock = new CardDesk();
     const randomCards = cardBlock.getCards(5);
-    console.log(randomCards);
-    setCardState(randomCards.map(card => ({
+    setCardsState(randomCards.map(card => ({
       rank: card.rank,
       suit: card.suit,
     })));
-
   };
-  if (cardState.length === 0) {
+  const handPoker = new PokerHand(cardsState);
+  const currentHand = handPoker.getOutcome();
+  if (cardsState.length === 0) {
     return (
         <>
           <div>
@@ -39,10 +41,11 @@ function App() {
             <button onClick={showCards}>Показать карты</button>
           </div>
           <div className="playingCards faceImages">
-            {cardState.map((card, index) => (
+            {cardsState.map((card, index) => (
                 <Card key={index} rank={card.rank} suit={card.suit}/>
             ))}
           </div>
+          <div className="current-hand">{currentHand}</div>
         </>
     );
   }
