@@ -7,9 +7,9 @@ interface Props {
 
 const Card: React.FC<Props> = ({rank, suit}) => {
   return (
-      <span className="card rank-k diams">
+      <span className={`card rank-${rank.toLowerCase()} ${suit}`}>
         <span className="rank">{rank}</span>
-        <span className="suit">{suit}</span>
+      <span className="suit">{suit === 'hearts' ? '♥' : suit === 'diams' ? '♦' : suit === 'clubs' ? '♣' : '♠'}</span>
       </span>
   );
 };
