@@ -73,8 +73,6 @@ class PokerHand {
         return 'Одна пара';
       }
     }
-
-
     return 'Старшая карта';
   }
 }

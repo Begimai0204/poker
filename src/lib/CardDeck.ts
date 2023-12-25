@@ -10,7 +10,6 @@ class CardDesk {
       this.ranks.forEach((rank) => {
         const card = new Card(rank, suit);
         this.cardBlock.push(card);
-
       });
     });
   }
